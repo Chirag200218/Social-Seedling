@@ -1,0 +1,52 @@
+.container{
+    width: 300px;
+    height: 100vh;
+    background-color: var(--main-bg);
+    position: absolute;
+    top: 0px;
+    right: 50px;
+    padding-top: 50px;
+    /* box-shadow: 0px 4px 18px 0px rgba(#000000, 25%);
+    border-radius: 0px 25px 0px 0px; */
+    @media only screen and (max-width: 1500px) {
+        width: 250px;
+   }
+    @media only screen and (max-width: 1250px) {
+         display: none;
+    }
+}
+
+.notificationbox{
+    width: 100%;
+    height: 350px;
+    margin-bottom: 30px;
+    background-color: var(--white);
+    padding: 10px;
+    box-shadow: -1px 3px 23px 0px var(--box-shad-color);
+    span{
+        font-size: 22px;
+        padding-bottom: 3px;
+        border-bottom: 2px solid var(--box-color);
+    }
+    p{
+        padding: 8px 4px;
+        margin: 8px 0px;
+        height: 40px;
+        // border: 1px solid red;
+        display: flex;
+        align-items: center;
+        &:hover{
+            background-color: var(--hover-color);
+            border-radius: 10px;
+        }
+    }
+
+}
+
+.advertisementbox{
+    height: 200px;
+    width: 100%;
+    background-color: var(--white);
+    position: relative;
+
+}
