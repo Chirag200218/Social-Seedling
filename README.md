@@ -1,3 +1,5 @@
+##Note - As application is in DEMO MODE of Unspalsh API therefore I have restriction of 50 API CALLS per Hour,which can restrict you from experiencing smooth app performance. 
+
 #Social Seedlings
 #	A web app having functionality similar to Instagram's news feed and profile
 section created by Chirag jain and documented on 30th july 2023.
