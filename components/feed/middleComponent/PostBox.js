@@ -1,7 +1,9 @@
 import React from 'react'
-import styles from './style.module.scss'
-import Image from 'next/image'
 import { useSelector } from 'react-redux'
+import Image from 'next/image'
+
+import styles from './style.module.scss'
+
 
 const  PostBox = () => {
   const user = useSelector((state)=>state.user);

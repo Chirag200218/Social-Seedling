@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import styles from './style.module.scss'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
+import Image from 'next/image'
+
+import styles from './style.module.scss'
+
 
 const index = ({postData,likeID,hgt}) => {
   const router = useRouter();
-  const[like,setLike] = useState(likeID.has(postData.id)?true:false);
-  const[error,setError] = useState({state:"false",message:"none"})
-
+  const[like,setLike] = useState(false);
+  const[unlike,setUnLike] =useState(false);
+ 
   function directTo(link){
     router.push(link);
   }
 
   function toggleLike(e){
-    if(like===false){
+    if(likeID.has(postData.id)===false && like===false){
+      setLike(true);setUnLike(false);
       let link = `https://api.unsplash.com/photos/${postData.id}/like?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8`
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
@@ -30,9 +33,10 @@ const index = ({postData,likeID,hgt}) => {
 
       fetch(link,requestOptions)
         .then(response => response.json())
-        .then(result => setLike(true))
-        .catch(error => console.log('error', error));
+        .then(result => {setLike(true),setUnLike(false)})
+        .catch(error => {setLike(false);setUnLike(true),console.log('error', error)});
     }else{
+      setLike(false),setUnLike(true)
       let link = `https://api.unsplash.com/photos/${postData.id}/like?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8`
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
@@ -46,14 +50,15 @@ const index = ({postData,likeID,hgt}) => {
         redirect: 'follow'
       };
 
-      fetch(link,{cache: "no-store"},requestOptions)
+      fetch(link,requestOptions)
         .then(response => response.text())
-        .then(result => setLike(false))
-        .catch(error => console.log('error',error));
+        .then(result => {setLike(false),setUnLike(true)})
+        .catch(error => {setLike(true),setUnLike(false),console.log('error',error)});
     }
   }
 
-  useEffect(()=>{},[likeID])
+
+
   return (
     
     <div className={styles.postbox}>
@@ -63,10 +68,10 @@ const index = ({postData,likeID,hgt}) => {
             <Image style={{position:"absolute",right:"20px",cursor:"pointer"}} src={"/3dot.png"} width={18} height={18}></Image>
         </div>
         <div style={{position:"relative",width:"100%",height:hgt?"250px":"400px"}}>
-            <Image style={{borderRadius:"2px"}} src={postData.urls.regular} layout='fill'></Image>
+            <Image style={{borderRadius:"2px"}} alt={"users_post"} src={postData.urls.regular} layout='fill'></Image>
         </div>
         <div className={styles.features}>
-            {like===false?<Image onClick={(e)=>toggleLike(e)} style={{marginRight:"20px",cursor:'pointer'}} src={"/like.png"} width={24} height={24}></Image>:<Image onClick={(e)=>toggleLike(e)} style={{marginRight:"20px",cursor:'pointer'}} src={"/heart.png"} width={24} height={24}></Image>}
+            {((unlike===true)||(like===false && likeID.has(postData.id)===false))?<Image onClick={(e)=>toggleLike(e)} style={{marginRight:"20px",cursor:'pointer'}} src={"/like.png"} width={24} height={24}></Image>:<Image onClick={(e)=>toggleLike(e)} style={{marginRight:"20px",cursor:'pointer'}} src={"/heart.png"} width={24} height={24}></Image>}
             <Image style={{marginRight:"20px",cursor:'pointer'}} src={"/comment.png"} width={24} height={24}></Image>
             <Image style={{marginRight:"20px",cursor:'pointer'}} src={"/Insshare.png"} width={24} height={24}></Image>
 

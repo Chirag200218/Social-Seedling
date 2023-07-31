@@ -1,12 +1,13 @@
 import NavBar from '../../feed/navbar'
 import React, { useEffect, useState } from 'react'
-import UserBox from './UserBox'
 import { useSelector } from 'react-redux'
+
+import UserBox from './UserBox'
 import Loader from '../../loader'
+
 const index = ({id}) => {
   const [user,setUser] = useState(null);
   const owner = useSelector((state)=>state.user);
-  const[error,setError] = useState({state:"false",message:"none"})
 
   useEffect(()=>{
     function fetchUser(){
@@ -41,24 +42,15 @@ const index = ({id}) => {
           }
           setUser(data);
         })
-        .catch(error => console.log('error', setError({state:true,message:error+""})))
+        .catch(error => console.log('error',error))
     }
-    console.log(owner.username+" "+id);
     if(owner.username!==id){
       fetchUser();
     }else{
+      owner.owner=true;
       setUser(owner);
     }
-   
   },[id])
-
-  if(error.state===true){
-    return(
-      <div style={{backgroundColor:"white",position:"absolute",top:"50px",margin:"auto",height:"300px",width:"300px",display:"flex",alignItems:"center",justifyContent:"center"}}>
-        {error.message}
-      </div>
-    )
-  }
 
   if(user===null){
     return (

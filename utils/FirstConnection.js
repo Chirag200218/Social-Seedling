@@ -30,7 +30,6 @@ const FirstConnection = () => {
                     result1.map((data)=>{
                     likes.push(data.id)
                   })
-                  console.log(result);
                   const data = {
                       id:result.id,
                       username:result.username,

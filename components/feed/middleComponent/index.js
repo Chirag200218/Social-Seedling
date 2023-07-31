@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './style.module.scss'
 import PostBox from './PostBox'
 import FeedBox from './FeedBox'
-import { useEffect } from 'react'
+
 const index = () => {
 
   const [page,setPage] = useState(1);

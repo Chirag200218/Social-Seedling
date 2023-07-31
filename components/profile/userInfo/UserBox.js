@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import styles from './style.module.scss';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import Image from 'next/image';
+import styles from './style.module.scss';
 import Post from '../../post'
 import Loader from '../../loader'
 
@@ -80,7 +80,7 @@ const UserBox = ({ user }) => {
     const GridImage = function ({ data, idx }) {
         return (
             <div style={{cursor:"pointer"}} onClick={()=>setShowPost(data)} className={styles.gridimage}>
-                <Image src={data.urls.regular} layout='fill'></Image>
+                <Image src={data.urls.regular} layout='fill' alt="owner_posts"></Image>
             </div> 
         )
     }
@@ -102,7 +102,7 @@ const UserBox = ({ user }) => {
                                 <p style={{ fontSize: "24px", fontWeight: "500" }}>{user?.username}</p>
                                 <p style={{ fontSize: "16px", color: "grey" }}>{user?.name}</p>
                             </div>
-                            <button style={{ height: "80%", width: "100px" }}>Follow</button>
+                            <button style={{ height: "80%", width: "100px" }}>{user.owner?"Edit Profile":"Follow"}</button>
                             <div className={styles.dots} style={{}}>
                                 <Image src={'/3dot.png'} height={16} width={16}></Image>
                             </div>
@@ -136,7 +136,7 @@ const UserBox = ({ user }) => {
                         <div className={styles.userFollow}>
                             <p>{user?.username}</p>
                             <Image src={'/3dot.png'} height={16} width={16}></Image>
-                            <button>Follow</button>
+                            <button>{user.owner?"Edit Profile":"Follow"}</button>
                         </div>
                     </div>
                     <p style={{marginTop:"10px", marginLeft:"5px",fontSize:"15px",fontWeight:"600"}}>{user?.name}</p>

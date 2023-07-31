@@ -1,26 +1,18 @@
 'use client';
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
 import styles from './style.module.scss'
 import Image from 'next/image'
-import Post from '../../post'
-import { useSelector } from 'react-redux'
+import Post from '../../post';
 import Loader from '../../loader'
-import { useQuery } from 'react-query';
 
 const FeedBox = ({page}) => {
 
   const[val,setValue] = useState([]);
   const userLikes = new Set(useSelector((state)=>state.user.likes));
   const [load,setLoad] = useState(false);
-  const[error,setError] = useState({state:"false",message:"none"})
-
-
-  useEffect(()=>{
-    let value = JSON.parse(localStorage.getItem('data'));
-    if(value){
-      setValue(value);
-    }
-  },[])
+  
   useEffect(()=>{
     async function fetchPost(){
       setLoad(true); 
@@ -28,7 +20,7 @@ const FeedBox = ({page}) => {
       const obj = await fetch(file)
       const txt = await obj.json();
       let data = [...val,...txt];
-      localStorage.setItem('data', JSON.stringify(data));
+      // localStorage.setItem('data', JSON.stringify(data));
       setValue((prev)=>[...prev,...txt]);
       setLoad(false);
     }
@@ -50,7 +42,6 @@ const FeedBox = ({page}) => {
           <Post postData={data} likeID={userLikes} key={idx}/>
         ))
       }
-
       {load===true && <Loader/>}
     </div>
   )
