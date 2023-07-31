@@ -12,7 +12,7 @@ const index = ({id}) => {
   useEffect(()=>{
     function fetchUser(){
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
+      myHeaders.append("Authorization",`Bearer ${process.env.NEXT_PUBLIC_TOKEN}`);
   
       var raw = "";
   
@@ -22,7 +22,7 @@ const index = ({id}) => {
         redirect: 'follow'
       };
   
-      fetch(`https://api.unsplash.com/users/${id}/?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8`, requestOptions)
+      fetch(`https://api.unsplash.com/users/${id}/?client_id=${process.env.NEXT_PUBLIC_CLIENTID}`, requestOptions)
         .then(response => response.json())
         .then(result =>  {
           console.log(result)

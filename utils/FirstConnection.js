@@ -12,7 +12,7 @@ const FirstConnection = () => {
     useEffect(()=>{
         function fetchUserDetails(){
             let myHeaders = new Headers();
-            myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
+            myHeaders.append("Authorization", `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`);
             
             let requestOptions = {
               method: 'GET',
@@ -20,10 +20,10 @@ const FirstConnection = () => {
               redirect: 'follow'
             };
             
-            fetch("https://api.unsplash.com/me/?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8", requestOptions)
+            fetch(`https://api.unsplash.com/me/?client_id=${process.env.NEXT_PUBLIC_CLIENTID}`, requestOptions)
               .then(response => response.json())
               .then(result => {
-                fetch("https://api.unsplash.com/users/chiragj/likes?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8&per_page=1000",requestOptions)
+                fetch(`https://api.unsplash.com/users/chiragj/likes?client_id=${process.env.NEXT_PUBLIC_CLIENTID}&per_page=1000`,requestOptions)
                 .then(response => response.json())
                 .then(result1 => {
                   let likes = [];
@@ -49,19 +49,13 @@ const FirstConnection = () => {
                     dispatch(CreateId(data));
                 })
               })
-              .catch(error =>{console.log(error),setError({state:true,message:error+""})});
+              .catch(error =>{console.log("error", error)});
         }
         fetchUserDetails();
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     },[])
-    // if(error.state===true){&
-    //   return(
-    //     <div style={{zIndex:"1",backgroundColor:"white",position:"absolute",top:"50px",marginLeft:"40%",textAlign:"center",height:"300px",width:"300px",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0px 2px 8px 0px grey"}}>
-    //       <span>{error.message}</span>
-    //     </div>
-    //   )
-    // }
+
   return (
      <>
      </>

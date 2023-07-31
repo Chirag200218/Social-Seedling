@@ -26,9 +26,9 @@ const UserBox = ({ user }) => {
 
     function userPosts(pageno) {
         setLoad(true);
-        let link = `https://api.unsplash.com/users/${user.username}/photos?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8&page=${pageno}&per_page=12`;
+        let link = `https://api.unsplash.com/users/${user.username}/photos?client_id=${process.env.NEXT_PUBLIC_CLIENTID}&page=${pageno}&per_page=12`;
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
+        myHeaders.append("Authorization", `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`);
         var requestOptions = {
             method: 'GET',
             headers: myHeaders,
@@ -60,9 +60,9 @@ const UserBox = ({ user }) => {
 
     useEffect(() => {
         function userPosts() {
-            let link = `https://api.unsplash.com/users/${user.username}/photos?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8&page=1&per_page=12`;
+            let link = `https://api.unsplash.com/users/${user.username}/photos?client_id=${process.env.NEXT_PUBLIC_CLIENTID}8&page=1&per_page=12`;
             var myHeaders = new Headers();
-            myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
+            myHeaders.append("Authorization", `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`);
             var requestOptions = {
                 method: 'GET',
                 headers: myHeaders,

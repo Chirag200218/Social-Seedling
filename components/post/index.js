@@ -18,9 +18,9 @@ const index = ({postData,likeID,hgt}) => {
   function toggleLike(e){
     if(likeID.has(postData.id)===false && like===false){
       setLike(true);setUnLike(false);
-      let link = `https://api.unsplash.com/photos/${postData.id}/like?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8`
+      let link = `https://api.unsplash.com/photos/${postData.id}/like?client_id=${process.env.NEXT_PUBLIC_CLIENTID}`
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
+      myHeaders.append("Authorization", `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`);
 
       var raw = "";
 
@@ -37,9 +37,9 @@ const index = ({postData,likeID,hgt}) => {
         .catch(error => {setLike(false);setUnLike(true),console.log('error', error)});
     }else{
       setLike(false),setUnLike(true)
-      let link = `https://api.unsplash.com/photos/${postData.id}/like?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8`
+      let link = `https://api.unsplash.com/photos/${postData.id}/like?client_id=${process.env.NEXT_PUBLIC_CLIENTID}`
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer 9VOLcNhimpopaTeIbeBtbG63Vdb0QEanTtZs2F10s2o");
+      myHeaders.append("Authorization", `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`);
 
       var raw = "";
 

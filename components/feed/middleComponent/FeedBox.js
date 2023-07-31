@@ -1,4 +1,3 @@
-'use client';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -16,7 +15,7 @@ const FeedBox = ({page}) => {
   useEffect(()=>{
     async function fetchPost(){
       setLoad(true); 
-      const file = `https://api.unsplash.com/photos/?client_id=pDHY6BQBdLm6dNLZHBk4xlE1Xu0yLLrtDaBus61FIy8&page=${page}`;
+      const file = `https://api.unsplash.com/photos/?client_id=${process.env.NEXT_PUBLIC_CLIENTID}&page=${page}`;
       const obj = await fetch(file)
       const txt = await obj.json();
       let data = [...val,...txt];
