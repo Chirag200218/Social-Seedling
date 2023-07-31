@@ -47,7 +47,6 @@ const index = ({id}) => {
     if(owner.username!==id){
       fetchUser();
     }else{
-      owner.owner=true;
       setUser(owner);
     }
   },[id])

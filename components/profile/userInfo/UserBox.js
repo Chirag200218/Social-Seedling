@@ -102,7 +102,7 @@ const UserBox = ({ user }) => {
                                 <p style={{ fontSize: "24px", fontWeight: "500" }}>{user?.username}</p>
                                 <p style={{ fontSize: "16px", color: "grey" }}>{user?.name}</p>
                             </div>
-                            <button style={{ height: "80%", width: "100px" }}>{user.owner?"Edit Profile":"Follow"}</button>
+                            <button style={{ height: "80%", width: "100px" }}>{user.name==="Chirag Jain"?"Edit Profile":"Follow"}</button>
                             <div className={styles.dots} style={{}}>
                                 <Image src={'/3dot.png'} height={16} width={16}></Image>
                             </div>
@@ -136,7 +136,8 @@ const UserBox = ({ user }) => {
                         <div className={styles.userFollow}>
                             <p>{user?.username}</p>
                             <Image src={'/3dot.png'} height={16} width={16}></Image>
-                            <button>{user.owner?"Edit Profile":"Follow"}</button>
+                            
+                            <button>{user.name==="Chirag Jain"?"Edit Profile":"Follow"}</button>
                         </div>
                     </div>
                     <p style={{marginTop:"10px", marginLeft:"5px",fontSize:"15px",fontWeight:"600"}}>{user?.name}</p>
